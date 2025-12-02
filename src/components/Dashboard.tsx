@@ -92,6 +92,48 @@ export const Dashboard = ({ pacientes }: DashboardProps) => {
       </div>
 
       <div className="dashboard-grid">
+        {/* Card de Comparecimento */}
+        <div className="dashboard-card card-destaque">
+          <div className="card-destaque-header">
+            <h3>Comparecimento</h3>
+            <div className="card-destaque-icon">✓</div>
+          </div>
+          <div className="card-destaque-content">
+            <div className="card-destaque-valor">
+              {pacientes.filter(p => p.validacao?.comparecimento).length}
+            </div>
+            <div className="card-destaque-total">
+              de {pacientes.length} pacientes
+            </div>
+            <div className="card-destaque-percentual">
+              {pacientes.length > 0 
+                ? ((pacientes.filter(p => p.validacao?.comparecimento).length / pacientes.length) * 100).toFixed(1)
+                : 0}%
+            </div>
+          </div>
+        </div>
+
+        {/* Card de Exames Realizados */}
+        <div className="dashboard-card card-destaque">
+          <div className="card-destaque-header">
+            <h3>Exames Realizados</h3>
+            <div className="card-destaque-icon">🔬</div>
+          </div>
+          <div className="card-destaque-content">
+            <div className="card-destaque-valor">
+              {pacientes.filter(p => p.validacao?.examesRealizados).length}
+            </div>
+            <div className="card-destaque-total">
+              de {pacientes.length} pacientes
+            </div>
+            <div className="card-destaque-percentual">
+              {pacientes.length > 0 
+                ? ((pacientes.filter(p => p.validacao?.examesRealizados).length / pacientes.length) * 100).toFixed(1)
+                : 0}%
+            </div>
+          </div>
+        </div>
+
         {/* Estatísticas por Motivo/Subgrupo de OCI */}
         <div className="dashboard-card">
           <h3>Motivo/Subgrupo de OCI - Estatística Comparativa</h3>

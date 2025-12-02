@@ -543,6 +543,85 @@ body {
   gap: 1.5rem;
 }
 
+/* Cards de Destaque */
+.card-destaque {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card-destaque:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card-destaque-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.card-destaque-header h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: white;
+}
+
+.card-destaque-icon {
+  font-size: 2rem;
+  opacity: 0.8;
+}
+
+.card-destaque-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.card-destaque-valor {
+  font-size: 3.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+
+.card-destaque-total {
+  font-size: 1rem;
+  opacity: 0.9;
+  margin-bottom: 1rem;
+}
+
+.card-destaque-percentual {
+  font-size: 2rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}
+
+/* Card de Comparecimento - variação do vermelho */
+.card-destaque:nth-of-type(1) {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+}
+
+/* Card de Exames Realizados - tom mais claro do vermelho */
+.card-destaque:nth-of-type(2) {
+  background: linear-gradient(135deg, #ef5350 0%, var(--primary-color) 100%);
+}
+
 .resumo-item {
   text-align: center;
   padding: 1.5rem;

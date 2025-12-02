@@ -1,5 +1,5 @@
 import { Paciente, EstatisticasMotivos, EstatisticasMensais, EstatisticasStatus, SubgrupoOCI, StatusOCI } from '../types';
-import { format, parse, differenceInDays } from 'date-fns';
+import { format, parse, differenceInDays, startOfDay } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 
 export const calcularEstatisticasMotivos = (pacientes: Paciente[]): EstatisticasMotivos[] => {
@@ -114,8 +114,8 @@ export const calcularEstatisticasMensais = (pacientes: Paciente[]): Estatisticas
 
 export const calcularStatusPrazo = (prazoConclusao: string): 'verde' | 'amarelo' | 'vermelho' => {
   try {
-    const prazo = parse(prazoConclusao, 'dd/MM/yyyy', new Date());
-    const hoje = new Date();
+    const prazo = startOfDay(parse(prazoConclusao, 'dd/MM/yyyy', new Date()));
+    const hoje = startOfDay(new Date());
     const diasRestantes = differenceInDays(prazo, hoje);
 
     if (diasRestantes < 0) return 'vermelho'; // Vencido
@@ -128,8 +128,8 @@ export const calcularStatusPrazo = (prazoConclusao: string): 'verde' | 'amarelo'
 
 export const calcularDiasRestantes = (prazoConclusao: string): number => {
   try {
-    const prazo = parse(prazoConclusao, 'dd/MM/yyyy', new Date());
-    const hoje = new Date();
+    const prazo = startOfDay(parse(prazoConclusao, 'dd/MM/yyyy', new Date()));
+    const hoje = startOfDay(new Date());
     return differenceInDays(prazo, hoje);
   } catch {
     return -999;

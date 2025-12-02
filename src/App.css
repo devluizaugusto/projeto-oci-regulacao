@@ -524,6 +524,7 @@ body {
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   min-height: 500px;
+  overflow: visible;
 }
 
 .dashboard-card.full-width {
@@ -669,6 +670,608 @@ body {
   color: var(--text-secondary);
 }
 
+/* Estilos para Dashboard melhorado */
+.estatistica-comparativa {
+  width: 100%;
+}
+
+.estatistica-header {
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.estatistica-label {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+.estatisticas-status-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  overflow: visible;
+}
+
+.estatisticas-status-container .recharts-wrapper {
+  overflow: visible !important;
+  width: 100% !important;
+}
+
+.estatisticas-status-container .recharts-pie {
+  overflow: visible !important;
+}
+
+.estatisticas-status-container .recharts-surface {
+  overflow: visible !important;
+}
+
+.status-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.status-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: var(--bg-color);
+  border-radius: 6px;
+}
+
+.status-color {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.status-label {
+  flex: 1;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.status-value {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--primary-color);
+}
+
+.status-percentual {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.estatisticas-mensais-container {
+  width: 100%;
+}
+
+.mensais-detalhes {
+  margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.mensal-item {
+  padding: 1rem;
+  background: var(--bg-color);
+  border-radius: 6px;
+  border-left: 4px solid var(--primary-color);
+}
+
+.mensal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.mensal-mes {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+.mensal-total {
+  font-weight: 700;
+  color: var(--primary-color);
+  font-size: 1.1rem;
+}
+
+.mensal-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.mensal-stat {
+  font-size: 0.9rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.mensal-stat.concluidas {
+  background: #d1e7dd;
+  color: #0f5132;
+}
+
+.mensal-stat.pendentes {
+  background: #fff3cd;
+  color: #856404;
+}
+
+/* Tabela de Pacientes */
+.tabela-filtros {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: var(--bg-color);
+  border-radius: 6px;
+  flex-wrap: wrap;
+}
+
+.filtro-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 200px;
+}
+
+.filtro-group label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.filtro-group select {
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 0.9rem;
+  background: white;
+  cursor: pointer;
+}
+
+.filtro-group select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.tabela-container {
+  overflow-x: auto;
+  overflow-y: auto;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  max-height: 600px;
+  width: 100%;
+}
+
+.tabela-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.tabela-header h3 {
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.tabela-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.total-registros {
+  font-weight: 600;
+  color: var(--primary-color);
+  font-size: 0.9rem;
+}
+
+.tabela-wrapper {
+  width: 100%;
+}
+
+.tabela-container-moderna {
+  overflow-x: auto;
+  overflow-y: auto;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  max-height: 700px;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.tabela-pacientes-moderna {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.875rem;
+  min-width: 1600px;
+}
+
+.tabela-pacientes-moderna thead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+}
+
+.tabela-pacientes-moderna thead th {
+  padding: 1rem 0.75rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: white;
+  white-space: nowrap;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.tabela-pacientes-moderna thead th:first-child {
+  border-top-left-radius: 8px;
+}
+
+.tabela-pacientes-moderna thead th:last-child {
+  border-top-right-radius: 8px;
+}
+
+.tabela-pacientes-moderna tbody tr {
+  transition: background-color 0.2s ease;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.tabela-pacientes-moderna tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.tabela-pacientes-moderna tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.tabela-pacientes-moderna tbody td {
+  padding: 0.875rem 0.75rem;
+  vertical-align: middle;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.cell-content {
+  display: flex;
+  align-items: center;
+  min-height: 24px;
+}
+
+.col-nome {
+  min-width: 180px;
+  font-weight: 500;
+}
+
+.col-data-nasc,
+.col-consulta,
+.col-prazo {
+  min-width: 120px;
+  white-space: nowrap;
+}
+
+.col-idade {
+  min-width: 80px;
+  text-align: center;
+}
+
+.col-mae {
+  min-width: 150px;
+}
+
+.col-cpf {
+  min-width: 140px;
+}
+
+.col-telefone {
+  min-width: 130px;
+}
+
+.col-subgrupo {
+  min-width: 200px;
+}
+
+.col-status-prazo {
+  min-width: 150px;
+}
+
+.col-comparecimento,
+.col-exames {
+  min-width: 140px;
+  text-align: center;
+}
+
+.col-status {
+  min-width: 160px;
+}
+
+.subgrupo-badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  background: #e3f2fd;
+  color: #1976d2;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.data-destaque {
+  color: var(--primary-color);
+  font-size: 0.9rem;
+}
+
+.status-prazo-badge {
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: center;
+  display: inline-block;
+  min-width: 120px;
+}
+
+.checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.checkbox-input {
+  width: 18px;
+  height: 18px;
+  cursor: default;
+  accent-color: var(--primary-color);
+}
+
+.checkbox-input:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+.checkbox-label-moderna {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  display: inline-block;
+  min-width: 50px;
+  text-align: center;
+}
+
+.checkbox-label-moderna.exames-sim,
+.checkbox-label-moderna.comparecimento-sim {
+  color: #0f5132;
+  background-color: #d1e7dd;
+}
+
+.checkbox-label-moderna.exames-nao,
+.checkbox-label-moderna.comparecimento-nao {
+  color: #842029;
+  background-color: #f8d7da;
+}
+
+.status-badge-moderna {
+  display: inline-block;
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  min-width: 120px;
+}
+
+.status-badge-moderna.status-pendente {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status-badge-moderna.status-em-andamento {
+  background-color: #cfe2ff;
+  color: #084298;
+}
+
+.status-badge-moderna.status-aguardando-exames {
+  background-color: #e7d5ff;
+  color: #5a189a;
+}
+
+.status-badge-moderna.status-concluida {
+  background-color: #d1e7dd;
+  color: #0f5132;
+}
+
+.status-badge-moderna.status-cancelada {
+  background-color: #f8d7da;
+  color: #842029;
+}
+
+.pacientes-tabela {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  font-size: 0.85rem;
+  min-width: 1400px;
+}
+
+.pacientes-tabela thead {
+  position: sticky;
+  top: 0;
+  background: var(--primary-color);
+  color: white;
+  z-index: 10;
+}
+
+.pacientes-tabela th {
+  padding: 0.75rem 0.5rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.pacientes-tabela td {
+  padding: 0.6rem 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.pacientes-tabela tbody tr:hover {
+  background: var(--bg-color);
+}
+
+.pacientes-tabela tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.nome-cell {
+  font-weight: 500;
+  color: var(--text-primary);
+  min-width: 200px;
+}
+
+.data-consulta-cell {
+  font-weight: 600;
+  color: var(--primary-color);
+  white-space: nowrap;
+}
+
+.checkbox-cell {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.checkbox-cell input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: default;
+  accent-color: var(--primary-color);
+}
+
+.checkbox-cell input[type="checkbox"]:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+.checkbox-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.checkbox-label.exames-sim {
+  color: #0f5132;
+  background-color: #d1e7dd;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.checkbox-label.exames-nao {
+  color: #842029;
+  background-color: #f8d7da;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.checkbox-label.comparecimento-sim {
+  color: #0f5132;
+  background-color: #d1e7dd;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.checkbox-label.comparecimento-nao {
+  color: #842029;
+  background-color: #f8d7da;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.status-cell {
+  min-width: 150px;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.4rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.status-badge.status-pendente {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status-badge.status-em-andamento {
+  background-color: #cfe2ff;
+  color: #084298;
+}
+
+.status-badge.status-aguardando-exames {
+  background-color: #e7d5ff;
+  color: #5a189a;
+}
+
+.status-badge.status-concluída {
+  background-color: #d1e7dd;
+  color: #0f5132;
+}
+
+.status-badge.status-cancelada {
+  background-color: #f8d7da;
+  color: #842029;
+}
+
+.status-prazo-indicator {
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  min-width: 150px;
+}
+
+.tabela-vazia {
+  padding: 3rem;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
 @media (max-width: 768px) {
   .pacientes-grid {
     grid-template-columns: 1fr;
@@ -684,6 +1287,27 @@ body {
 
   .app-main {
     padding: 1rem;
+  }
+
+  .tabela-container {
+    max-height: 400px;
+  }
+
+  .pacientes-tabela {
+    font-size: 0.8rem;
+  }
+
+  .pacientes-tabela th,
+  .pacientes-tabela td {
+    padding: 0.5rem;
+  }
+
+  .tabela-filtros {
+    flex-direction: column;
+  }
+
+  .filtro-group {
+    min-width: 100%;
   }
 }
 

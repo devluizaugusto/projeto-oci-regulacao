@@ -181,6 +181,26 @@ body {
   padding: 2rem;
 }
 
+.app-footer {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  color: white;
+  padding: 1.5rem 2rem;
+  text-align: center;
+  margin-top: auto;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.app-footer p {
+  margin: 0;
+  font-size: 0.95rem;
+  opacity: 0.95;
+}
+
 .actions-bar {
   display: flex;
   justify-content: space-between;
@@ -539,7 +559,7 @@ body {
 
 .resumo-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
 }
 
@@ -624,29 +644,42 @@ body {
 
 .resumo-item {
   text-align: center;
-  padding: 1.5rem;
-  background: var(--bg-color);
-  border-radius: 8px;
+  padding: 2rem;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  color: white;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.resumo-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
 
 .resumo-valor {
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: bold;
-  color: var(--primary-color);
+  color: white;
   margin-bottom: 0.5rem;
 }
 
 .resumo-label {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
   font-weight: 500;
+  margin-bottom: 0.5rem;
 }
 
 .resumo-percentual {
-  font-size: 1.2rem;
-  color: var(--primary-color);
+  font-size: 1.5rem;
+  color: white;
   font-weight: 600;
   margin-top: 0.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  display: inline-block;
 }
 
 .percentuais-list {

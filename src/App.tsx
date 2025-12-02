@@ -202,6 +202,12 @@ function App() {
           <Dashboard pacientes={pacientes} />
         )}
       </main>
+
+      <footer className="app-footer">
+        <div className="footer-content">
+          <p>Desenvolvido por Luiz Augusto de Andrade Silva - {new Date().getFullYear()}</p>
+        </div>
+      </footer>
     </div>
   );
 }

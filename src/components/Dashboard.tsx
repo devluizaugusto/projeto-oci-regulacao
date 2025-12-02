@@ -457,28 +457,6 @@ export const Dashboard = ({ pacientes }: DashboardProps) => {
             </div>
             <div className="resumo-item">
               <div className="resumo-valor">
-                {pacientes.filter(p => p.validacao?.comparecimento).length}
-              </div>
-              <div className="resumo-label">Comparecimentos</div>
-              <div className="resumo-percentual">
-                {pacientes.length > 0 
-                  ? ((pacientes.filter(p => p.validacao?.comparecimento).length / pacientes.length) * 100).toFixed(1)
-                  : 0}%
-              </div>
-            </div>
-            <div className="resumo-item">
-              <div className="resumo-valor">
-                {pacientes.filter(p => p.validacao?.examesRealizados).length}
-              </div>
-              <div className="resumo-label">Exames Realizados</div>
-              <div className="resumo-percentual">
-                {pacientes.length > 0 
-                  ? ((pacientes.filter(p => p.validacao?.examesRealizados).length / pacientes.length) * 100).toFixed(1)
-                  : 0}%
-              </div>
-            </div>
-            <div className="resumo-item">
-              <div className="resumo-valor">
                 {pacientes.filter(p => p.validacao?.statusAtual === 'Concluída').length}
               </div>
               <div className="resumo-label">OCI's Concluídas</div>

@@ -60,7 +60,9 @@ export const calcularEstatisticasMensais = (pacientes: Paciente[]): Estatisticas
   pacientes.forEach(paciente => {
     try {
       const dataConsulta = parse(paciente.dataConsulta, 'dd/MM/yyyy', new Date());
-      const mesAno = format(dataConsulta, 'MMMM yyyy', { locale: ptBR });
+      const mesAnoFormatado = format(dataConsulta, 'MMMM yyyy', { locale: ptBR });
+      // Capitalizar a primeira letra do mês
+      const mesAno = mesAnoFormatado.charAt(0).toUpperCase() + mesAnoFormatado.slice(1);
       
       if (!meses[mesAno]) {
         meses[mesAno] = { consultas: 0, concluidas: 0, pendentes: 0, pendentesConclusao: 0 };
@@ -106,8 +108,11 @@ export const calcularEstatisticasMensais = (pacientes: Paciente[]): Estatisticas
       percentualPendentes: totalPendentes > 0 ? Number(((dados.pendentes / totalPendentes) * 100).toFixed(2)) : 0,
     }))
     .sort((a, b) => {
-      const dataA = parse(a.mes, 'MMMM yyyy', new Date(), { locale: ptBR });
-      const dataB = parse(b.mes, 'MMMM yyyy', new Date(), { locale: ptBR });
+      // Converter para minúscula para fazer o parse correto, já que o locale espera minúscula
+      const mesA = a.mes.charAt(0).toLowerCase() + a.mes.slice(1);
+      const mesB = b.mes.charAt(0).toLowerCase() + b.mes.slice(1);
+      const dataA = parse(mesA, 'MMMM yyyy', new Date(), { locale: ptBR });
+      const dataB = parse(mesB, 'MMMM yyyy', new Date(), { locale: ptBR });
       return dataA.getTime() - dataB.getTime();
     });
 };

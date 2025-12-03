@@ -229,50 +229,73 @@ export const Dashboard = ({ pacientes }: DashboardProps) => {
         {/* Estatísticas Mensais */}
         <div className="dashboard-card full-width">
           <h3>Estatísticas Mensais - Consultas e OCI's por Mês</h3>
-          <div className="estatisticas-mensais-container">
-            <ResponsiveContainer width="100%" height={500}>
-              <BarChart data={estatisticasMensais}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="mes" angle={-45} textAnchor="end" height={120} />
-                <YAxis />
-                <Tooltip 
-                  formatter={(value: number, name: string, props: any) => {
-                    if (name === 'consultas') {
-                      return [`${value} consultas (${props.payload.percentualConsultas}%)`, 'Consultas'];
-                    }
-                    if (name === 'ocisConcluidas') {
-                      return [`${value} OCI's concluídas (${props.payload.percentualConcluidas}%)`, "OCI's Concluídas"];
-                    }
-                    if (name === 'ocisPendentesConclusao') {
-                      return [`${value} OCI's precisam ser concluídas`, "OCI's que Precisam ser Concluídas"];
-                    }
-                    return value;
-                  }}
-                />
-                <Legend />
-                <Bar dataKey="consultas" fill="#8884d8" name="Consultas Realizadas" />
-                <Bar dataKey="ocisConcluidas" fill="#4caf50" name="OCI's Concluídas" />
-                <Bar dataKey="ocisPendentesConclusao" fill="#ff9800" name="OCI's que Precisam ser Concluídas" />
-              </BarChart>
-            </ResponsiveContainer>
-            <div className="mensais-detalhes">
-              {estatisticasMensais.map((item) => (
-                <div key={item.mes} className="mensal-item">
-                  <div className="mensal-header">
-                    <span className="mensal-mes">{item.mes}</span>
-                    <span className="mensal-total">{item.consultas} consultas</span>
+          <div className="mensais-grid">
+            {estatisticasMensais.map((item) => {
+              const dadosGrafico = [
+                { name: 'Consultas', value: item.consultas, fill: '#8884d8' },
+                { name: "OCI's Concluídas", value: item.ocisConcluidas, fill: '#4caf50' },
+                { name: "OCI's Pendentes", value: item.ocisPendentesConclusao, fill: '#ff9800' },
+              ].filter(d => d.value > 0);
+
+              return (
+                <div key={item.mes} className="mensal-card">
+                  <div className="mensal-card-header">
+                    <h4 className="mensal-card-title">{item.mes}</h4>
+                    <span className="mensal-card-total">{item.consultas} consultas</span>
                   </div>
-                  <div className="mensal-stats">
-                    <span className="mensal-stat concluidas">
-                      ✓ {item.ocisConcluidas} concluídas ({item.percentualConcluidas}%)
-                    </span>
-                    <span className="mensal-stat pendentes">
-                      ⚠ {item.ocisPendentesConclusao} precisam ser concluídas
-                    </span>
+                  
+                  <div className="mensal-card-grafico">
+                    {dadosGrafico.length > 0 ? (
+                      <ResponsiveContainer width="100%" height={300}>
+                        <BarChart data={dadosGrafico}>
+                          <CartesianGrid strokeDasharray="3 3" />
+                          <XAxis dataKey="name" angle={-15} textAnchor="end" height={80} />
+                          <YAxis />
+                          <Tooltip 
+                            formatter={(value: number, name: string, props: any) => {
+                              if (props.payload.name === 'Consultas') {
+                                return [`${value} consultas (${item.percentualConsultas}%)`, 'Consultas'];
+                              }
+                              if (props.payload.name === "OCI's Concluídas") {
+                                return [`${value} OCI's concluídas (${item.percentualConcluidas}%)`, "OCI's Concluídas"];
+                              }
+                              if (props.payload.name === "OCI's Pendentes") {
+                                return [`${value} OCI's precisam ser concluídas`, "OCI's que Precisam ser Concluídas"];
+                              }
+                              return value;
+                            }}
+                          />
+                          <Bar dataKey="value" fill="#8884d8">
+                            {dadosGrafico.map((entry, index) => (
+                              <Cell key={`cell-${index}`} fill={entry.fill} />
+                            ))}
+                          </Bar>
+                        </BarChart>
+                      </ResponsiveContainer>
+                    ) : (
+                      <div className="mensal-sem-dados">
+                        <p>Nenhum dado disponível para este mês</p>
+                      </div>
+                    )}
+                  </div>
+                  
+                  <div className="mensal-card-detalhes">
+                    <div className="mensal-detalhe-item">
+                      <span className="mensal-detalhe-label">Consultas:</span>
+                      <span className="mensal-detalhe-value">{item.consultas} ({item.percentualConsultas}%)</span>
+                    </div>
+                    <div className="mensal-detalhe-item">
+                      <span className="mensal-detalhe-label concluidas">OCI's Concluídas:</span>
+                      <span className="mensal-detalhe-value concluidas">✓ {item.ocisConcluidas} ({item.percentualConcluidas}%)</span>
+                    </div>
+                    <div className="mensal-detalhe-item">
+                      <span className="mensal-detalhe-label pendentes">OCI's Pendentes:</span>
+                      <span className="mensal-detalhe-value pendentes">⚠ {item.ocisPendentesConclusao}</span>
+                    </div>
                   </div>
                 </div>
-              ))}
-            </div>
+              );
+            })}
           </div>
         </div>
 

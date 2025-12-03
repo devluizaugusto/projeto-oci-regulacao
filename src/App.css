@@ -870,6 +870,114 @@ body {
   gap: 1rem;
 }
 
+.mensais-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.mensal-card {
+  background: var(--bg-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mensal-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.mensal-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.mensal-card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin: 0;
+}
+
+.mensal-card-total {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--primary-color);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+}
+
+.mensal-card-grafico {
+  width: 100%;
+  margin: 1rem 0;
+  min-height: 300px;
+}
+
+.mensal-sem-dados {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.mensal-card-detalhes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.mensal-detalhe-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 4px;
+}
+
+.mensal-detalhe-label {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+}
+
+.mensal-detalhe-label.concluidas {
+  color: #0f5132;
+}
+
+.mensal-detalhe-label.pendentes {
+  color: #856404;
+}
+
+.mensal-detalhe-value {
+  font-weight: 700;
+  color: var(--primary-color);
+  font-size: 0.95rem;
+}
+
+.mensal-detalhe-value.concluidas {
+  color: #4caf50;
+}
+
+.mensal-detalhe-value.pendentes {
+  color: #ff9800;
+}
+
 .mensal-item {
   padding: 1rem;
   background: var(--bg-color);
@@ -1384,6 +1492,26 @@ body {
   font-size: 1rem;
 }
 
+@media (max-width: 1024px) {
+  .mensais-grid {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  }
+
+  .mensal-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .mensal-card-title {
+    font-size: 1.1rem;
+  }
+
+  .mensal-card-grafico {
+    min-height: 250px;
+  }
+}
+
 @media (max-width: 768px) {
   .pacientes-grid {
     grid-template-columns: 1fr;
@@ -1391,6 +1519,33 @@ body {
 
   .dashboard-grid {
     grid-template-columns: 1fr;
+  }
+
+  .mensais-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mensal-card {
+    padding: 1rem;
+  }
+
+  .mensal-card-title {
+    font-size: 1rem;
+  }
+
+  .mensal-card-total {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .mensal-card-grafico {
+    min-height: 200px;
+  }
+
+  .mensal-detalhe-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
   }
 
   .form-grid {

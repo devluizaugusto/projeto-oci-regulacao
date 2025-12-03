@@ -252,7 +252,7 @@ export const Dashboard = ({ pacientes }: DashboardProps) => {
                           <XAxis dataKey="name" angle={-15} textAnchor="end" height={80} />
                           <YAxis />
                           <Tooltip 
-                            formatter={(value: number, name: string, props: any) => {
+                            formatter={(value: number, _name: string, props: any) => {
                               if (props.payload.name === 'Consultas') {
                                 return [`${value} consultas (${item.percentualConsultas}%)`, 'Consultas'];
                               }

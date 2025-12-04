@@ -248,30 +248,30 @@ export const Dashboard = ({ pacientes }: DashboardProps) => {
                     {dadosGrafico.length > 0 ? (
                       <ResponsiveContainer width="100%" height={300}>
                         <BarChart data={dadosGrafico}>
-                          <CartesianGrid strokeDasharray="3 3" />
+                <CartesianGrid strokeDasharray="3 3" />
                           <XAxis dataKey="name" angle={-15} textAnchor="end" height={80} />
-                          <YAxis />
-                          <Tooltip 
-                            formatter={(value: number, _name: string, props: any) => {
+                <YAxis />
+                <Tooltip 
+                  formatter={(value: number, name: string, props: any) => {
                               if (props.payload.name === 'Consultas') {
                                 return [`${value} consultas (${item.percentualConsultas}%)`, 'Consultas'];
-                              }
+                    }
                               if (props.payload.name === "OCI's Concluídas") {
                                 return [`${value} OCI's concluídas (${item.percentualConcluidas}%)`, "OCI's Concluídas"];
-                              }
+                    }
                               if (props.payload.name === "OCI's Pendentes") {
-                                return [`${value} OCI's precisam ser concluídas`, "OCI's que Precisam ser Concluídas"];
-                              }
-                              return value;
-                            }}
-                          />
+                      return [`${value} OCI's precisam ser concluídas`, "OCI's que Precisam ser Concluídas"];
+                    }
+                    return value;
+                  }}
+                />
                           <Bar dataKey="value" fill="#8884d8">
                             {dadosGrafico.map((entry, index) => (
                               <Cell key={`cell-${index}`} fill={entry.fill} />
                             ))}
                           </Bar>
-                        </BarChart>
-                      </ResponsiveContainer>
+              </BarChart>
+            </ResponsiveContainer>
                     ) : (
                       <div className="mensal-sem-dados">
                         <p>Nenhum dado disponível para este mês</p>

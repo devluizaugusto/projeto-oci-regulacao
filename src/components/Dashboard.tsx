@@ -461,37 +461,29 @@ export const Dashboard = ({ pacientes }: DashboardProps) => {
 
         {/* Resumo Numérico */}
         <div className="dashboard-card full-width">
-          <h3>Resumo Numérico e Percentuais</h3>
+          <h3>Resumo Numérico</h3>
           <div className="resumo-grid">
             <div className="resumo-item">
               <div className="resumo-valor">{pacientes.length}</div>
               <div className="resumo-label">Total de Pacientes</div>
-              <div className="resumo-percentual">100%</div>
             </div>
             <div className="resumo-item">
               <div className="resumo-valor">
                 {estatisticasMotivos.reduce((acc, item) => acc + item.quantidade, 0)}
               </div>
               <div className="resumo-label">Total de OCI's</div>
-              <div className="resumo-percentual">100%</div>
             </div>
             <div className="resumo-item">
               <div className="resumo-valor">
                 {estatisticasMensais.reduce((acc, item) => acc + item.consultas, 0)}
               </div>
               <div className="resumo-label">Total de Consultas</div>
-              <div className="resumo-percentual">100%</div>
             </div>
             <div className="resumo-item">
               <div className="resumo-valor">
                 {pacientes.filter(p => p.validacao?.statusAtual === 'Concluída').length}
               </div>
               <div className="resumo-label">OCI's Concluídas</div>
-              <div className="resumo-percentual">
-                {pacientes.length > 0 
-                  ? ((pacientes.filter(p => p.validacao?.statusAtual === 'Concluída').length / pacientes.length) * 100).toFixed(1)
-                  : 0}%
-              </div>
             </div>
             <div className="resumo-item">
               <div className="resumo-valor">
@@ -501,14 +493,6 @@ export const Dashboard = ({ pacientes }: DashboardProps) => {
                 }).length}
               </div>
               <div className="resumo-label">OCI's Pendentes</div>
-              <div className="resumo-percentual">
-                {pacientes.length > 0 
-                  ? ((pacientes.filter(p => {
-                    const status = p.validacao?.statusAtual || 'Pendente';
-                    return status !== 'Concluída' && status !== 'Cancelada';
-                  }).length / pacientes.length) * 100).toFixed(1)
-                  : 0}%
-              </div>
             </div>
             <div className="resumo-item">
               <div className="resumo-valor">
@@ -518,14 +502,6 @@ export const Dashboard = ({ pacientes }: DashboardProps) => {
                 }).length}
               </div>
               <div className="resumo-label">OCI's Vencidas</div>
-              <div className="resumo-percentual">
-                {pacientes.length > 0 
-                  ? ((pacientes.filter(p => {
-                    const statusPrazo = calcularStatusPrazo(p.prazoConclusao);
-                    return statusPrazo === 'vermelho';
-                  }).length / pacientes.length) * 100).toFixed(1)
-                  : 0}%
-              </div>
             </div>
           </div>
         </div>

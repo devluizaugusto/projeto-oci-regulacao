@@ -1,4 +1,4 @@
-import { Paciente, EstatisticasMotivos, EstatisticasMensais, EstatisticasStatus, SubgrupoOCI, StatusOCI } from '../types';
+import { Paciente, EstatisticasMotivos, EstatisticasMensais, EstatisticasStatus, StatusOCI } from '../types';
 import { format, parse, differenceInDays, startOfDay } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 

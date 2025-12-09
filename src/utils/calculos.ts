@@ -3,24 +3,24 @@ import { format, parse, differenceInDays, startOfDay } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 
 export const calcularEstatisticasMotivos = (pacientes: Paciente[]): EstatisticasMotivos[] => {
-  const contagem: Record<SubgrupoOCI, number> = {
-    'Avaliação de retinopatia diabética': 0,
-    'Avaliação de glaucoma': 0,
-    'Avaliação de catarata': 0,
-    'Avaliação de estrabismo': 0,
-    'Avaliação de pterígio': 0,
-    'Outros': 0,
-  };
+  // Usar um Record com string para permitir qualquer valor da planilha
+  const contagem: Record<string, number> = {};
 
   pacientes.forEach(paciente => {
-    contagem[paciente.subgrupoOCI] = (contagem[paciente.subgrupoOCI] || 0) + 1;
+    // Usar o valor original da planilha se disponível, senão usar o normalizado
+    const motivo = paciente.subgrupoOCIOriginal || paciente.subgrupoOCI;
+    
+    // Garantir que o motivo não seja vazio
+    if (motivo && motivo.trim().length > 0) {
+      contagem[motivo] = (contagem[motivo] || 0) + 1;
+    }
   });
 
   const total = pacientes.length;
 
   return Object.entries(contagem)
     .map(([motivo, quantidade]) => ({ 
-      motivo: motivo as SubgrupoOCI, 
+      motivo, 
       quantidade,
       percentual: total > 0 ? Number(((quantidade / total) * 100).toFixed(2)) : 0
     }))
@@ -56,10 +56,54 @@ export const calcularEstatisticasStatus = (pacientes: Paciente[]): EstatisticasS
 
 export const calcularEstatisticasMensais = (pacientes: Paciente[]): EstatisticasMensais[] => {
   const meses: Record<string, { consultas: number; concluidas: number; pendentes: number; pendentesConclusao: number }> = {};
+  const anoAtual = new Date().getFullYear();
+  const anoMinimo = 2000; // Ano mínimo aceito
 
   pacientes.forEach(paciente => {
     try {
-      const dataConsulta = parse(paciente.dataConsulta, 'dd/MM/yyyy', new Date());
+      // Parsear a data de forma mais robusta
+      let dataConsulta: Date;
+      const partesData = paciente.dataConsulta.split('/');
+      
+      if (partesData.length === 3) {
+        const dia = parseInt(partesData[0]);
+        const mes = parseInt(partesData[1]) - 1; // Mês é 0-indexed
+        const ano = parseInt(partesData[2]);
+        
+        // Validar ano - se for menor que 2000, provavelmente é erro
+        // Aceitar apenas anos entre 2000 e ano atual + 10 (para permitir datas futuras)
+        if (ano < anoMinimo || ano > anoAtual + 10) {
+          console.error('Ano inválido na data:', paciente.dataConsulta, 'Ano:', ano);
+          return;
+        }
+        
+        // Criar a data diretamente para evitar problemas de parsing
+        dataConsulta = new Date(ano, mes, dia);
+        
+        // Validar se a data é válida
+        if (isNaN(dataConsulta.getTime()) || 
+            dataConsulta.getFullYear() !== ano || 
+            dataConsulta.getMonth() !== mes || 
+            dataConsulta.getDate() !== dia) {
+          console.error('Data inválida após criação:', paciente.dataConsulta);
+          return;
+        }
+      } else {
+        // Tentar parsing padrão se o formato não estiver correto
+        dataConsulta = parse(paciente.dataConsulta, 'dd/MM/yyyy', new Date());
+        
+        if (isNaN(dataConsulta.getTime())) {
+          console.error('Data inválida:', paciente.dataConsulta);
+          return;
+        }
+        
+        const ano = dataConsulta.getFullYear();
+        if (ano < anoMinimo || ano > anoAtual + 10) {
+          console.error('Ano inválido após parsing:', paciente.dataConsulta, 'Ano:', ano);
+          return;
+        }
+      }
+      
       const mesAnoFormatado = format(dataConsulta, 'MMMM yyyy', { locale: ptBR });
       // Capitalizar a primeira letra do mês
       const mesAno = mesAnoFormatado.charAt(0).toUpperCase() + mesAnoFormatado.slice(1);
@@ -79,13 +123,26 @@ export const calcularEstatisticasMensais = (pacientes: Paciente[]): Estatisticas
         
         // Verificar se precisa ser concluída (não está concluída e não está cancelada)
         const hoje = new Date();
-        const prazo = parse(paciente.prazoConclusao, 'dd/MM/yyyy', new Date());
-        if (prazo >= hoje) {
+        const partesPrazo = paciente.prazoConclusao.split('/');
+        let prazo: Date;
+        
+        if (partesPrazo.length === 3) {
+          const anoPrazo = parseInt(partesPrazo[2]);
+          if (anoPrazo >= anoMinimo && anoPrazo <= anoAtual + 10) {
+            prazo = new Date(anoPrazo, parseInt(partesPrazo[1]) - 1, parseInt(partesPrazo[0]));
+          } else {
+            prazo = parse(paciente.prazoConclusao, 'dd/MM/yyyy', new Date());
+          }
+        } else {
+          prazo = parse(paciente.prazoConclusao, 'dd/MM/yyyy', new Date());
+        }
+        
+        if (!isNaN(prazo.getTime()) && prazo.getFullYear() >= anoMinimo && prazo >= hoje) {
           meses[mesAno].pendentesConclusao += 1;
         }
       }
     } catch (error) {
-      console.error('Erro ao processar data:', paciente.dataConsulta);
+      console.error('Erro ao processar data:', paciente.dataConsulta, error);
     }
   });
 

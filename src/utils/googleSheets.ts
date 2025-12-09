@@ -414,6 +414,7 @@ const linhaParaPaciente = (linha: any[], index: number, indicesColunas?: { [key:
       cpf,
       telefone,
       subgrupoOCI: subgrupoNormalizado,
+      subgrupoOCIOriginal: subgrupoOCI, // Armazenar valor original da planilha
       dataConsulta: dataConsultaFormatada,
       prazoConclusao,
       validacao: {

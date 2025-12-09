@@ -25,7 +25,11 @@ export const Dashboard = ({ pacientes }: DashboardProps) => {
   const pacientesFiltrados = pacientes
     .filter(p => {
       if (filtroStatus !== 'todos' && p.validacao?.statusAtual !== filtroStatus) return false;
-      if (filtroMotivo !== 'todos' && p.subgrupoOCI !== filtroMotivo) return false;
+      if (filtroMotivo !== 'todos') {
+        // Comparar com valor original ou normalizado
+        const motivoPaciente = p.subgrupoOCIOriginal || p.subgrupoOCI;
+        if (motivoPaciente !== filtroMotivo) return false;
+      }
       return true;
     })
     .sort((a, b) => {
@@ -252,7 +256,7 @@ export const Dashboard = ({ pacientes }: DashboardProps) => {
                           <XAxis dataKey="name" angle={-15} textAnchor="end" height={80} />
                 <YAxis />
                 <Tooltip 
-                  formatter={(value: number, name: string, props: any) => {
+                  formatter={(value: number, _name: string, props: any) => {
                               if (props.payload.name === 'Consultas') {
                                 return [`${value} consultas (${item.percentualConsultas}%)`, 'Consultas'];
                     }
@@ -369,7 +373,7 @@ export const Dashboard = ({ pacientes }: DashboardProps) => {
                         </td>
                         <td className="col-subgrupo">
                           <div className="cell-content">
-                            <span className="subgrupo-badge">{paciente.subgrupoOCI || '-'}</span>
+                            <span className="subgrupo-badge">{paciente.subgrupoOCIOriginal || paciente.subgrupoOCI || '-'}</span>
                           </div>
                         </td>
                         <td className="col-consulta">

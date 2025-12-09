@@ -22,6 +22,7 @@ export interface Paciente {
   cpf: string;
   telefone: string;
   subgrupoOCI: SubgrupoOCI;
+  subgrupoOCIOriginal?: string; // Valor original da planilha
   dataConsulta: string;
   prazoConclusao: string; // Data limite para conclusão
   validacao: {
@@ -32,7 +33,7 @@ export interface Paciente {
 }
 
 export interface EstatisticasMotivos {
-  motivo: SubgrupoOCI;
+  motivo: string; // Usar string para permitir valores originais da planilha
   quantidade: number;
   percentual: number;
 }

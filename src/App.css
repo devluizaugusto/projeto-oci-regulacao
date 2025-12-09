@@ -35,7 +35,9 @@ body {
   display: flex;
   flex-direction: column;
   width: 100%;
+  max-width: 100vw;
   overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 .app-header {
@@ -182,27 +184,19 @@ body {
 
 .app-main {
   flex: 1;
-  max-width: 1200px;
   width: 100%;
+  max-width: 100vw;
   margin: 0 auto;
   padding: 2rem;
   overflow-x: hidden;
   overflow-y: visible;
+  box-sizing: border-box;
 }
 
-/* Correção específica para cards de destaque - garantir visibilidade */
-.card-destaque * {
-  color: white !important;
-}
-
-.card-destaque-valor,
-.card-destaque-total,
-.card-destaque-percentual {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  position: relative !important;
-  z-index: 10 !important;
+@media (min-width: 1200px) {
+  .app-main {
+    max-width: 1200px;
+  }
 }
 
 .app-footer {
@@ -519,6 +513,9 @@ body {
 
 .dashboard {
   width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 .dashboard-header {
@@ -528,6 +525,9 @@ body {
   margin-bottom: 2rem;
   padding-bottom: 1rem;
   border-bottom: 2px solid var(--border-color);
+  flex-wrap: wrap;
+  gap: 1rem;
+  width: 100%;
 }
 
 .dashboard h2 {
@@ -558,8 +558,18 @@ body {
 
 .dashboard-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(500px, 100%), 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem;
+  }
 }
 
 .dashboard-card {
@@ -571,6 +581,9 @@ body {
   height: auto;
   overflow: visible;
   position: relative;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .dashboard-card.full-width {
@@ -585,8 +598,17 @@ body {
 
 .resumo-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .resumo-grid {
+    grid-template-columns: 1fr !important;
+  }
 }
 
 /* Cards de Destaque */
@@ -596,14 +618,13 @@ body {
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  min-height: auto;
-  height: auto;
+  min-height: 200px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: stretch;
   transition: transform 0.3s, box-shadow 0.3s;
-  overflow: visible;
+  overflow: hidden;
   box-sizing: border-box;
   position: relative;
 }
@@ -633,19 +654,17 @@ body {
 }
 
 .card-destaque-content {
-  flex: 0 1 auto;
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
   min-height: 0;
-  height: auto;
   overflow: visible;
   width: 100%;
   position: relative;
   z-index: 1;
-  padding: 0.5rem 0;
 }
 
 .card-destaque-valor {
@@ -654,9 +673,6 @@ body {
   margin-bottom: 0.5rem;
   line-height: 1;
   color: white;
-  display: block;
-  visibility: visible;
-  opacity: 1;
 }
 
 .card-destaque-total {
@@ -664,8 +680,6 @@ body {
   opacity: 0.9;
   margin-bottom: 1rem;
   color: white;
-  display: block;
-  visibility: visible;
 }
 
 .card-destaque-percentual {
@@ -676,9 +690,6 @@ body {
   border-radius: 20px;
   backdrop-filter: blur(10px);
   color: white;
-  display: block;
-  visibility: visible;
-  white-space: nowrap;
 }
 
 /* Card de Comparecimento - variação do vermelho */
@@ -781,8 +792,17 @@ body {
 
 .percentuais-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1.5rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .percentuais-list {
+    grid-template-columns: 1fr !important;
+  }
 }
 
 .percentual-detalhado-item {
@@ -834,6 +854,9 @@ body {
 /* Estilos para Dashboard melhorado */
 .estatistica-comparativa {
   width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 .estatistica-header {
@@ -853,6 +876,9 @@ body {
   flex-direction: column;
   gap: 1.5rem;
   overflow: visible;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .estatisticas-status-container .recharts-wrapper {
@@ -873,6 +899,15 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1rem;
   margin-top: 1rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .status-list {
+    grid-template-columns: 1fr !important;
+  }
 }
 
 .status-item {
@@ -924,6 +959,16 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr));
   gap: 1.5rem;
   margin-top: 1.5rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .mensais-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem;
+  }
 }
 
 .mensal-card {
@@ -1621,8 +1666,10 @@ body {
 
   /* Main Content */
   .app-main {
-    padding: 1rem;
+    padding: 0.75rem;
     overflow-y: visible;
+    width: 100%;
+    max-width: 100vw;
   }
 
   /* Forçar visibilidade dos valores nos cards */
@@ -1670,12 +1717,14 @@ body {
   }
 
   .dashboard-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
+    grid-template-columns: 1fr !important;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 100%;
   }
 
   .dashboard-card {
-    padding: 1.25rem;
+    padding: 0.75rem;
     min-height: auto;
     height: auto;
     overflow: visible;
@@ -1688,65 +1737,66 @@ body {
 
   /* Cards de Destaque */
   .card-destaque {
-    padding: 1rem;
+    padding: 0.75rem 0.5rem;
     min-height: auto;
     height: auto;
     overflow: visible;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: stretch;
   }
 
-  .card-destaque-content {
-    flex: 0 1 auto;
-    padding: 0.75rem 0;
-    min-height: 0;
-    height: auto;
-  }
-
   .card-destaque-header {
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
+    flex-shrink: 0;
   }
 
   .card-destaque-header h3 {
-    font-size: 1rem;
+    font-size: 0.85rem;
     line-height: 1.2;
   }
 
   .card-destaque-icon {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
 
   .card-destaque-content {
-    padding: 0.5rem 0;
-    min-height: auto;
-    flex: 0 1 auto;
+    flex: 1 1 auto;
+    padding: 0.25rem 0;
+    min-height: 60px;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
   }
 
   .card-destaque-valor {
-    font-size: 2rem;
-    margin-bottom: 0.25rem;
-    line-height: 1.1;
+    font-size: 1.8rem !important;
+    margin-bottom: 0.25rem !important;
+    line-height: 1.1 !important;
     color: white !important;
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
+    font-weight: bold !important;
   }
 
   .card-destaque-total {
-    font-size: 0.9rem;
-    margin-bottom: 0.5rem;
+    font-size: 0.75rem !important;
+    margin-bottom: 0.4rem !important;
     color: white !important;
     display: block !important;
     visibility: visible !important;
+    opacity: 0.95 !important;
   }
 
   .card-destaque-percentual {
-    font-size: 1.5rem;
-    padding: 0.4rem 1rem;
+    font-size: 1rem !important;
+    padding: 0.3rem 0.7rem !important;
     color: white !important;
     display: block !important;
     visibility: visible !important;
-    white-space: nowrap;
+    white-space: nowrap !important;
+    font-weight: 600 !important;
   }
 
   .resumo-item {
@@ -1879,6 +1929,11 @@ body {
 
   .estatistica-comparativa .recharts-yAxis .recharts-label {
     font-size: 0.75rem;
+  }
+
+  .estatistica-comparativa .recharts-yAxis {
+    width: auto !important;
+    min-width: 120px;
   }
 
   /* Margens menores para gráficos em mobile */
@@ -2067,60 +2122,66 @@ body {
   }
 
   .card-destaque {
-    padding: 1rem;
+    padding: 0.65rem 0.5rem;
     min-height: auto;
     height: auto;
     overflow: visible;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: stretch;
   }
 
   .card-destaque-header {
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.4rem;
     flex: 0 0 auto;
   }
 
   .card-destaque-header h3 {
-    font-size: 0.95rem;
+    font-size: 0.8rem;
     line-height: 1.2;
   }
 
   .card-destaque-icon {
-    font-size: 1.5rem;
+    font-size: 1.1rem;
   }
 
   .card-destaque-content {
-    padding: 0.75rem 0;
-    min-height: 0;
+    padding: 0.2rem 0;
+    min-height: 50px;
     height: auto;
-    flex: 0 1 auto;
+    flex: 1 1 auto;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
   }
 
   .card-destaque-valor {
-    font-size: 1.75rem;
-    margin-bottom: 0.25rem;
-    line-height: 1.1;
+    font-size: 1.5rem !important;
+    margin-bottom: 0.2rem !important;
+    line-height: 1.1 !important;
     color: white !important;
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
+    font-weight: bold !important;
   }
 
   .card-destaque-total {
-    font-size: 0.85rem;
-    margin-bottom: 0.5rem;
+    font-size: 0.7rem !important;
+    margin-bottom: 0.3rem !important;
     color: white !important;
     display: block !important;
     visibility: visible !important;
   }
 
   .card-destaque-percentual {
-    font-size: 1.3rem;
-    padding: 0.4rem 1rem;
+    font-size: 0.9rem !important;
+    padding: 0.25rem 0.6rem !important;
     color: white !important;
     display: block !important;
     visibility: visible !important;
-    white-space: nowrap;
+    white-space: nowrap !important;
+    font-weight: 600 !important;
   }
 
   .resumo-item {
@@ -2267,56 +2328,61 @@ body {
   }
 
   .card-destaque {
-    padding: 0.75rem;
+    padding: 0.55rem 0.35rem;
     min-height: auto;
     height: auto;
     overflow: visible;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: stretch;
   }
 
   .card-destaque-header {
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.3rem;
     flex: 0 0 auto;
   }
 
   .card-destaque-header h3 {
-    font-size: 0.85rem;
-    line-height: 1.2;
+    font-size: 0.7rem;
+    line-height: 1.1;
   }
 
   .card-destaque-icon {
-    font-size: 1.25rem;
+    font-size: 0.95rem;
   }
 
   .card-destaque-content {
-    padding: 0.5rem 0;
-    min-height: 0;
+    padding: 0.1rem 0;
+    min-height: 40px;
     height: auto;
-    flex: 0 1 auto;
+    flex: 1 1 auto;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
   }
 
   .card-destaque-valor {
-    font-size: 1.5rem;
-    margin-bottom: 0.25rem;
-    line-height: 1.1;
+    font-size: 1.2rem !important;
+    margin-bottom: 0.15rem !important;
+    line-height: 1.1 !important;
     color: white !important;
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
+    font-weight: bold !important;
   }
 
   .card-destaque-total {
-    font-size: 0.75rem;
-    margin-bottom: 0.5rem;
+    font-size: 0.6rem !important;
+    margin-bottom: 0.2rem !important;
     color: white !important;
     display: block !important;
     visibility: visible !important;
   }
 
   .card-destaque-percentual {
-    font-size: 1.1rem;
-    padding: 0.4rem 0.8rem;
+    font-size: 0.75rem !important;
+    padding: 0.2rem 0.45rem !important;
     color: white !important;
     display: block !important;
     visibility: visible !important;
